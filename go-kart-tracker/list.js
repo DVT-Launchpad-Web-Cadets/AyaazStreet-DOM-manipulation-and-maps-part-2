@@ -19,8 +19,10 @@ const showListData = (data) => {
     });
     document.querySelector("#list").appendChild(lap);
     let prependNumber = i + 1 <= 9 ? "0" : "";
-    let lapTime = (data.lapSummaries[i]["time lap"] * Math.pow(10, -3)).toFixed(2);
-    let lapNumber =`${prependNumber}${i + 1}`;
+    let lapTime = (data.lapSummaries[i]["time lap"] * Math.pow(10, -3)).toFixed(
+      2
+    );
+    let lapNumber = `${prependNumber}${i + 1}`;
     let lapDriver = data.driver;
     document.getElementById(`${i}`).innerHTML = `
         <div class="lap-number">${lapNumber}</div>
