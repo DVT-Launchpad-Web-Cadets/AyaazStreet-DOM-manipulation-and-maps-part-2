@@ -23,10 +23,10 @@ const showListData = (data) => {
       2
     );
     let lapNumber = `${prependNumber}${i + 1}`;
-    let lapDriver = data.driver;
+    let lapSpeed = data.lapSummaries[i]["Max Speed GPS"];
     document.getElementById(`${i}`).innerHTML = `
         <div class="lap-number">${lapNumber}</div>
-        <div class="lap-driver">${lapDriver}</div>
+        <div class="lap-speed">${lapSpeed} mph</div>
         <div class="lap-time">${lapTime} s</div>
     `;
   }

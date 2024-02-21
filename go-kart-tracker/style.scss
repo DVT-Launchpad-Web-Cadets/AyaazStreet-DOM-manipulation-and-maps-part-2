@@ -11,15 +11,22 @@ body {
 
 #app {
   display: grid;
-  grid-template: 10% 90% / 1fr;
+  grid-template: 8% 2% 90% / 1fr;
   height: 100%;
 }
 
 h1 {
   text-align: center;
   font-weight: 400;
+  font-size: 2rem;
   margin: 1em;
-  margin-bottom: 0;
+}
+
+#race-details {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.5rem;
+  margin-top: 1em;
 }
 
 #main {
@@ -45,6 +52,12 @@ h1 {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
+  }
+
+  .lap-number,
+  .lap-speed,
+  .lap-time {
+    min-width: 4em;
   }
 }
 
