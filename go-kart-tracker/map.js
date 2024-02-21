@@ -12,19 +12,25 @@ let point = L.circle([0, 0], {
 let polylines = L.layerGroup();
 let latLngs = [];
 let drawing = false;
+let myTimeout;
 
 export default function getMapData() {
   getLap(filename, 1, showMapData);
 }
 
-export function drawLap(lapNumber) {
-  drawing = true;
+function clearMapLayers() {
   point.removeFrom(map);
   for (let index = 0; index < latLngs.length; index++) {
     polylines.removeFrom(map);
   }
   polylines.clearLayers();
   latLngs = [];
+  console.log("\n\n\nclearing\n\n\n");
+}
+
+export function drawLap(lapNumber) {
+  clearInterval(myTimeout);
+  drawing = true;
   getLap(filename, lapNumber, draw);
 }
 
@@ -55,18 +61,18 @@ function drawPolyline() {
 
 const draw = (data) => {
   drawing = false;
-  point.addTo(map);
   let index = 0;
-  let myTimeout = setInterval(() => {
+  clearMapLayers();
+  point.addTo(map);
+  myTimeout = setInterval(() => {
     if (drawing) clearInterval(myTimeout);
-    let speed = data.dataSet[index]["Speed GPS"];
     let latitude = data.dataSet[index]["Lat."] * Math.pow(10, -6);
     let longitude = data.dataSet[index]["Lon."] * Math.pow(10, -6);
     polylines.clearLayers();
+    console.log("rendering polyline...");
     latLngs.push([latitude, longitude]);
     drawPolyline();
     point.setLatLng([latitude, longitude]);
-
     index < data.dataSet.length - 1 ? index++ : clearInterval(myTimeout);
-  }, data.dataSet[index]["Speed GPS"] / 10);
+  }, 100);
 };
