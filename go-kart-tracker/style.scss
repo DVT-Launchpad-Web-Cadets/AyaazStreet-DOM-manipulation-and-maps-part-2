@@ -47,3 +47,12 @@ h1 {
     justify-content: space-between;
   }
 }
+
+@media screen and (min-width: 979px) {
+  #main {
+    grid-template: 1fr / 1fr 1fr;
+    grid-gap: 1em;
+    height: 90%;
+    margin: 2em;
+  }
+}
