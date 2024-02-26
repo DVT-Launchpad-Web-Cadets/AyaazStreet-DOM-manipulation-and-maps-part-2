@@ -1,1 +1,1 @@
-# DOM-manipulation-and-maps-part-1
+# DOM-manipulation-and-maps-part-2
