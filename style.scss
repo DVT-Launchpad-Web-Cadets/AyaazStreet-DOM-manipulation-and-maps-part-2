@@ -61,25 +61,8 @@ main {
 	flex-direction: column;
 	overflow-y: auto;
 
-	.lap {
-		cursor: pointer;
-		display: flex;
-		justify-content: space-between;
-		padding: 0.5em;
-	}
-
-	.lap:hover {
-		background-color: #f0f0f0;
-	}
-
 	.active {
 		background-color: #d8dfec;
-	}
-
-	.lap-number,
-	.lap-speed,
-	.lap-time {
-		min-width: 4em;
 	}
 }
 

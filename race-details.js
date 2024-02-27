@@ -8,15 +8,18 @@ export default function showRaceDetails(data) {
     return;
   }
   let raceDetails = "";
-  if (data?.trackName)
+  if (data.trackName)
     raceDetails += `${data.trackName}: `;
-  if (data?.driver)
+  if (data.driver)
     raceDetails += `${data.driver}'s `;
-  if (data?.sessionName) 
+  if (data.sessionName) 
     raceDetails += `${data.sessionName} on `;
-  if (data?.date)
+  if (data.date)
     raceDetails += `${data.date} `;
-  if (data?.time)
+  if (data.time)
     raceDetails += `${data.time}`;
-	raceDetailsElement.innerHTML = raceDetails;
+  if (raceDetails === "")
+    console.error("No race details found in API response.");
+	else 
+    raceDetailsElement.innerHTML = raceDetails;
 }
