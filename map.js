@@ -1,8 +1,8 @@
-import "./style.scss";
-import { getLap } from "./api-calls";
 import L from "leaflet";
+import { getLap } from "./api-calls";
 
 const filename = "SN2780_210722_11H00_NADINE_IDUBE_RACEWAY_16_5554.json";
+
 let map = L.map("map", { zoomControl: false });
 let point = L.circle([0, 0], {
 	color: "rgb(211, 82, 100)",
@@ -14,10 +14,6 @@ let polylines = L.layerGroup();
 let latLngs = [];
 let drawing = false;
 let myTimeout;
-
-export default function getMapData() {
-	getLap(filename, 1, showMapData);
-}
 
 function clearMapLayers() {
 	point.removeFrom(map);
@@ -35,7 +31,7 @@ export function drawLap(lapNumber) {
 	getLap(filename, lapNumber, draw);
 }
 
-const showMapData = (data) => {
+export default function showMapData(data) {
 	const latitude = data.dataSet[0]["Lat."] * Math.pow(10, -6);
 	const longitude = data.dataSet[0]["Lon."] * Math.pow(10, -6);
 	map.setView([latitude, longitude], 18);

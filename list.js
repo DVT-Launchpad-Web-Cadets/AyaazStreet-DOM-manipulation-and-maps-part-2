@@ -1,14 +1,6 @@
-import "./style.scss";
-import { getAllLaps } from "./api-calls";
 import { drawLap } from "./map";
 
-const filename = "SN2780_210722_11H00_NADINE_IDUBE_RACEWAY_16_5554.json";
-
-export default function getListData() {
-  getAllLaps(filename, showListData);
-}
-
-const showListData = (data) => {
+export default function showListData(data) {
   console.log(data);
   for (let i = 0; i < data.lapSummaries.length; i++) {
     let lap = document.createElement("div");
