@@ -3,14 +3,14 @@ import { getLap } from "./api-calls";
 
 const filename = "SN2780_210722_11H00_NADINE_IDUBE_RACEWAY_16_5554.json";
 
-let map = L.map("map", { zoomControl: false });
-let point = L.circle([0, 0], {
+const map = L.map("map", { zoomControl: false });
+const point = L.circle([0, 0], {
 	color: "rgb(211, 82, 100)",
 	fillColor: "rgb(211, 82, 100)",
 	fillOpacity: 1,
 	radius: 3,
 });
-let polylines = L.layerGroup();
+const polylines = L.layerGroup();
 let latLngs = [];
 let drawing = false;
 let myTimeout;
@@ -22,7 +22,6 @@ function clearMapLayers() {
 	}
 	polylines.clearLayers();
 	latLngs = [];
-	console.log("\n\n\nclearing\n\n\n");
 }
 
 export function drawLap(lapNumber) {
@@ -52,7 +51,7 @@ export default function showMapData(data) {
 };
 
 function drawPolyline() {
-	let polyline = L.polyline(latLngs, {
+	const polyline = L.polyline(latLngs, {
 		stroke: true,
 		color: "rgb(93, 112, 228)",
 		weight: 5,
@@ -72,10 +71,9 @@ const draw = (data) => {
 	point.addTo(map);
 	myTimeout = setInterval(() => {
 		if (drawing) clearInterval(myTimeout);
-		let latitude = data.dataSet[index]["Lat."] * Math.pow(10, -6);
-		let longitude = data.dataSet[index]["Lon."] * Math.pow(10, -6);
+		const latitude = data.dataSet[index]["Lat."] * Math.pow(10, -6);
+		const longitude = data.dataSet[index]["Lon."] * Math.pow(10, -6);
 		polylines.clearLayers();
-		console.log("rendering polyline...");
 		latLngs.push([latitude, longitude]);
 		drawPolyline();
 		point.setLatLng([latitude, longitude]);
