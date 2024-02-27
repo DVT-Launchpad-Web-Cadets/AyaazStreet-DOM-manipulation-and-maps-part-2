@@ -1,6 +1,22 @@
 export default function showRaceDetails(data) {
-  if (!(data?.trackName && data.driver && data.sessionName && data.date && data.time))
-    console.error("Race details could not be fetched");
-  else
-	  document.querySelector("#race-details").innerHTML = `${data.trackName}: ${data.driver}'s ${data.sessionName} on ${data.date} ${data.time}`;
+  const raceDetailsElement = document.querySelector("#race-details");
+  try {
+    if (!raceDetailsElement) throw new Error("Race Details Element Not Found");
+    if (!data) throw new Error("No Data Provided");
+  } catch (error) {
+    console.error(error);
+    return;
+  }
+  let raceDetails = "";
+  if (data?.trackName)
+    raceDetails += `${data.trackName}: `;
+  if (data?.driver)
+    raceDetails += `${data.driver}'s `;
+  if (data?.sessionName) 
+    raceDetails += `${data.sessionName} on `;
+  if (data?.date)
+    raceDetails += `${data.date} `;
+  if (data?.time)
+    raceDetails += `${data.time}`;
+	raceDetailsElement.innerHTML = raceDetails;
 }
