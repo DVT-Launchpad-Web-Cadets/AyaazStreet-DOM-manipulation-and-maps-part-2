@@ -1,0 +1,86 @@
+@import url('leaflet/dist/leaflet.css');
+
+html {
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+}
+
+#app {
+  display: grid;
+  grid-template: 10% 90% / 1fr;
+  height: 100%;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1em;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 400;
+  font-size: 2rem;
+  margin: 0;
+}
+
+#race-details {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+main {
+  display: grid;
+  grid-template: 1fr 1fr / 1fr;
+  grid-gap: 1em;
+  min-height: calc(100% - 2em);
+  padding: 1em 2em;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+#list {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  .active {
+    background-color: #d8dfec;
+  }
+}
+
+@media screen and (min-width: 979px) {
+  main {
+    grid-template: 1fr / 1fr 1fr;
+  }
+
+  #list {
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (min-width: 979px) and (max-height: 676px) {
+  main {
+    grid-template: 1fr / 1fr 1fr;
+  }
+
+  #list {
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  main {
+    grid-template: 1fr / 1fr 1fr;
+  }
+}
