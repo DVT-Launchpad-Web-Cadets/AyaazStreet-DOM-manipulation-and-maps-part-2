@@ -14,7 +14,7 @@ class lapButton extends HTMLElement {
                 width: 100%;
                 border: none;
                 background-color: transparent;
-				font-size: 1rem;
+				        font-size: 1rem;
             }
 
             .lap:hover {
@@ -34,11 +34,15 @@ class lapButton extends HTMLElement {
         </div>`;
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name: string, _oldValue: null, newValue: number) {
     this.setTargetToValue(name, newValue);
   }
 
-  setTargetToValue(targetId, value) {
+  setTargetToValue(targetId: string, value: number) {
+    if (!this.shadowRoot) {
+      console.error('No shadowRoot');
+      return;
+    }
     const target = this.shadowRoot.getElementById(targetId);
 
     if (!target) {
@@ -64,7 +68,7 @@ class lapButton extends HTMLElement {
 
         break;
       default:
-        target.innerText = value;
+        target.innerText = `${value}`;
     }
   }
 }

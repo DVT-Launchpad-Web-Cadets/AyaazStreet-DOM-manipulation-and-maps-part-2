@@ -7,16 +7,30 @@ import './style.scss';
 const filename = 'SN2780_210722_11H00_NADINE_IDUBE_RACEWAY_16_5554.json';
 
 function getRaceDetails() {
-  getAllLaps(filename, showRaceDetails);
+  try {
+    getAllLaps(filename, showRaceDetails, errorCallBack);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 function getMapData() {
-  getLap(filename, 1, showMapData);
+  try {
+    getLap(filename, 1, showMapData, errorCallBack);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 function getListData() {
-  getAllLaps(filename, showListData);
+  try {
+    getAllLaps(filename, showListData, errorCallBack);
+  } catch (error) {
+    console.error(error);
+  }
 }
+
+const errorCallBack = (error: Error) => console.error(error);
 
 getRaceDetails();
 getMapData();

@@ -1,5 +1,6 @@
 import L from 'leaflet';
 import { getLap } from './api-calls.ts';
+import type { IKartLap } from './models/go-kart.d.ts';
 
 const filename = 'SN2780_210722_11H00_NADINE_IDUBE_RACEWAY_16_5554.json';
 
@@ -11,9 +12,9 @@ const point = L.circle([0, 0], {
   radius: 3,
 });
 const polylines = L.layerGroup();
-let latLngs = [];
+let latLngs: Array<Array<number>> = [];
 let drawing = false;
-let myTimeout;
+let myTimeout: number | undefined;
 
 function clearMapLayers() {
   point.removeFrom(map);
@@ -24,13 +25,17 @@ function clearMapLayers() {
   latLngs = [];
 }
 
-export function drawLap(lapNumber) {
+export function drawLap(lapNumber: number) {
   clearInterval(myTimeout);
   drawing = true;
-  getLap(filename, lapNumber, draw);
+  try {
+    getLap(filename, lapNumber, draw, (error: Error) => console.error(error));
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-export default function showMapData(data) {
+export default function showMapData(data: IKartLap) {
   const latitude = data.dataSet[0]['Lat.'] * Math.pow(10, -6);
   const longitude = data.dataSet[0]['Lon.'] * Math.pow(10, -6);
   map.setView([latitude, longitude], 18);
@@ -51,7 +56,7 @@ export default function showMapData(data) {
 }
 
 function drawPolyline() {
-  const polyline = L.polyline(latLngs, {
+  const polyline = L.polyline(latLngs.map(([latitude, longitude]) => L.latLng(latitude, longitude)), {
     stroke: true,
     color: 'rgb(93, 112, 228)',
     weight: 5,
@@ -64,7 +69,7 @@ function drawPolyline() {
   polylines.addTo(map);
 }
 
-const draw = (data) => {
+const draw = (data: IKartLap) => {
   drawing = false;
   let index = 0;
   clearMapLayers();

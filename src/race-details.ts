@@ -1,4 +1,6 @@
-export default function showRaceDetails(data) {
+import type { IKartRace } from "./models/go-kart.d.ts";
+
+export default function showRaceDetails(data: IKartRace) {
   const raceDetailsElement = document.querySelector('#race-details');
   try {
     if (!raceDetailsElement) throw new Error('Race Details Element Not Found');
