@@ -1,13 +1,13 @@
-import type { IKartLap, IKartRace, IKartRaces } from './models/go-kart.d.ts';
+import type { IKartLap, IKartRace } from './models/go-kart.d.ts';
 
 export default function getAllRaces(
-  callBack: (allRacesJSON: IKartRaces) => void,
+  callBack: (allRacesJSON: string[]) => void,
   errorCallBack: (error: Error) => void,
-  finallyCallBack: () => void
+  finallyCallBack?: () => void
 ) {
   fetch('https://go-kart-api.onrender.com/runs')
     .then((response) => response.json())
-    .then((res: IKartRaces) => {
+    .then((res: string[]) => {
       if (!res) {
         throw new Error('No Races Found');
       }
@@ -21,9 +21,9 @@ export default function getAllRaces(
     });
 }
 
-export function getAllLaps(
+export function getLapSummary(
   filename: string,
-  callBack: (allLapsJSON: IKartRace) => void,
+  callBack: (allLapsJSON: IKartRace, filename: string) => void,
   errorCallBack: (error: Error) => void,
   finallyCallBack?: () => void
 ) {
@@ -33,7 +33,7 @@ export function getAllLaps(
       if (!res?.lapSummaries) {
         throw new Error(`No Laps Found for ${filename}`);
       }
-      callBack(res);
+      callBack(res, filename);
     })
     .catch((error) => {
       errorCallBack(error);

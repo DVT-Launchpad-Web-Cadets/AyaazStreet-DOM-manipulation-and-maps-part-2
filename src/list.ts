@@ -1,7 +1,7 @@
 import { drawLap } from './map.ts';
 import type { IKartRace } from './models/go-kart.d.ts';
 
-export default function showListData(data: IKartRace) {
+export default function showListData(data: IKartRace, filename: string) {
   const lapListElement = document.querySelector('#list');
   if (!lapListElement) throw new Error('Lap List Element Not Found');
   if (!data) throw new Error('No Data Provided');
@@ -20,7 +20,7 @@ export default function showListData(data: IKartRace) {
         if (!lapButtons) throw new Error('Lap buttons not found');
         for (const lapButton of lapButtons) lapButton.classList.remove('active');
         lap.classList.add('active');
-        drawLap(i + 1);
+        drawLap(i + 1, filename);
       });
       lapListElement.appendChild(lap);
     } catch (error) {

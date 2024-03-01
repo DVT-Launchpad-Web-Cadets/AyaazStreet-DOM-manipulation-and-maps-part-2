@@ -2,13 +2,8 @@ import type { IKartRace } from "./models/go-kart.d.ts";
 
 export default function showRaceDetails(data: IKartRace) {
   const raceDetailsElement = document.querySelector('#race-details');
-  try {
-    if (!raceDetailsElement) throw new Error('Race Details Element Not Found');
-    if (!data) throw new Error('No Data Provided');
-  } catch (error) {
-    console.error(error);
-    return;
-  }
+  if (!raceDetailsElement) throw new Error('Race Details Element Not Found');
+  if (!data) throw new Error('No Data Provided');
   let raceDetails = '';
   if (data.trackName) raceDetails += `${data.trackName}: `;
   if (data.driver) raceDetails += `${data.driver}'s `;

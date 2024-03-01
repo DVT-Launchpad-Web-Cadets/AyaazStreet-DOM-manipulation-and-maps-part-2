@@ -1,7 +1,3 @@
-export interface IKartRaces {
-  Root: string[];
-}
-
 export interface IKartRace {
   filename: string;
   trackName: string;

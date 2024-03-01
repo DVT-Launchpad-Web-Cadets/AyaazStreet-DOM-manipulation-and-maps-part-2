@@ -1,14 +1,18 @@
-import { getAllLaps, getLap } from './api-calls.ts';
+import getAllRaces, { getLap, getLapSummary } from './api-calls.ts';
 import showListData from './list.ts';
 import showMapData from './map.ts';
 import showRaceDetails from './race-details.ts';
 import './style.scss';
 
-const filename = 'SN2780_210722_11H00_NADINE_IDUBE_RACEWAY_16_5554.json';
+let filename: string;
+
+const getFilename = (data: string[]) => {
+  filename = data[0];
+};
 
 function getRaceDetails() {
   try {
-    getAllLaps(filename, showRaceDetails, errorCallBack);
+    getLapSummary(filename, showRaceDetails, errorCallBack);
   } catch (error) {
     console.error(error);
   }
@@ -24,7 +28,7 @@ function getMapData() {
 
 function getListData() {
   try {
-    getAllLaps(filename, showListData, errorCallBack);
+    getLapSummary(filename, showListData, errorCallBack);
   } catch (error) {
     console.error(error);
   }
@@ -32,6 +36,7 @@ function getListData() {
 
 const errorCallBack = (error: Error) => console.error(error);
 
+getAllRaces(getFilename, errorCallBack);
 getRaceDetails();
 getMapData();
 getListData();
