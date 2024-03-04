@@ -1,7 +1,7 @@
+import type { IAllLaps } from '../models/laps.d.ts';
 import { drawLap } from './map.ts';
-import type { IKartRace } from './models/go-kart.d.ts';
 
-export default function showListData(data: IKartRace, filename: string) {
+export default function showListData(data: IAllLaps, filename: string) {
   const lapListElement = document.querySelector('#list');
   if (!lapListElement) throw new Error('Lap List Element Not Found');
   if (!data) throw new Error('No Data Provided');
@@ -11,15 +11,16 @@ export default function showListData(data: IKartRace, filename: string) {
     try {
       if (!lap) throw new Error(`Lap ${i + 1} not found`);
       lap.setAttribute('number', `${i + 1}`);
-      if (!data.lapSummaries[i]?.['Max Speed GPS']) throw new Error(`Max Speed GPS for lap ${i} not found`);
-      lap.setAttribute('speed', `${data.lapSummaries[i]['Max Speed GPS'] / 10}`);
-      if (!data.lapSummaries[i]?.['time lap']) throw new Error(`Time lap for lap ${i} not found`);
-      lap.setAttribute('time', (data.lapSummaries[i]['time lap'] * Math.pow(10, -3)).toFixed(2));
+      if (!data.lapSummaries[i]?.maxSpeed) throw new Error(`Max Speed GPS for lap ${i} not found`);
+      lap.setAttribute('speed', `${data.lapSummaries[i]?.maxSpeed}`);
+      if (!data.lapSummaries[i]?.lapTime) throw new Error(`Time lap for lap ${i} not found`);
+      lap.setAttribute('time', `${data.lapSummaries[i]?.lapTime.toFixed(2)}`);
       lap.addEventListener('click', () => {
         const lapButtons = document.querySelectorAll('lap-button');
         if (!lapButtons) throw new Error('Lap buttons not found');
         for (const lapButton of lapButtons) lapButton.classList.remove('active');
         lap.classList.add('active');
+        const maxSpeed = lap.getAttribute('speed') ?? '0';
         drawLap(i + 1, filename);
       });
       lapListElement.appendChild(lap);

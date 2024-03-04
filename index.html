@@ -13,16 +13,17 @@
   </head>
   <body>
     <div id="app">
-      <nav>
+      <header>
         <h1>Go Kart Tracker</h1>
-        <div id="race-details"></div>
-      </nav>
+      </header>
       <main>
-        <div id="map"></div>
-        <div id="list"></div>
-      </div>
-    </main>
+        <h2>Races</h2>
+        <section style="display: none;" id="map"></section>
+        <section id="list"></section>
+      </main>
+    </div>
     <script type="module" src="./src/main.ts"></script>
-    <script type="module" src="./src/lap-button.ts"></script>
+    <script type="module" src="./src/components/race-button.ts"></script>
+    <script type="module" src="./src/components/lap-button.ts"></script>
   </body>
 </html>
