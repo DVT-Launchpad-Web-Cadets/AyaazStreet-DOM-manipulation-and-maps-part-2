@@ -41,7 +41,7 @@ interface IKartLapSummary {
 }
 
 export interface IKartLap {
-  fileName: string;
+  filename: string;
   dataSet: DataSet[];
 }
 

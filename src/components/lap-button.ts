@@ -13,12 +13,14 @@ class lapButton extends HTMLElement {
                 padding: 0.5em;
                 width: 100%;
                 border: none;
+                border-radius: 0.5em;
                 background-color: transparent;
 				        font-size: 1rem;
+                color: whitesmoke;
             }
 
             .lap:hover {
-                background-color: #f0f0f0;
+                background-color: #9d2821;
             }
 
             .lap-number,

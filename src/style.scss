@@ -3,6 +3,8 @@
 html {
   height: 100%;
   font-family: 'Montserrat', sans-serif;
+  color: whitesmoke;
+  background-color: #1f2128;
 }
 
 body {
@@ -12,22 +14,144 @@ body {
 
 #app {
   display: grid;
-  grid-template: 10% 90% / 1fr;
+  grid-template: 25% 75% / 1fr;
   height: 100%;
 }
 
-nav {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 1em;
+#main-header {
+  background-image: url(/go-kart-banner.png);
+  background-size: cover;
+  background-position-x: right;
+  background-position-y: center;
+
+  h1 {
+    margin: 1em;
+    font-size: 2rem;
+    text-shadow: #1f2128;
+  }
 }
 
-h1 {
-  text-align: center;
-  font-weight: 400;
-  font-size: 2rem;
-  margin: 0;
+#race-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #383a44;
+}
+
+#title-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 4em);
+  padding: 1em 2em;
+
+  .race-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #9495a0;
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: whitesmoke;
+    border: none;
+    border-radius: 100%;
+    padding: 0.8em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    img {
+      height: 1rem;
+      width: 1rem;
+    }
+
+    &:hover {
+      background-color: #2c2e3e;
+    }
+  }
+}
+
+#stats-header {
+  display: grid;
+  grid-template: 1fr / 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 4em;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+  }
+
+  h2 {
+    margin: 0;
+    margin-bottom: 0.2rem;
+    font-size: 2.5rem;
+    font-weight: 800;
+    span {
+      margin-left: 0.2rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #9495a0;
+    }
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 200;
+    color: #9495a0;
+  }
+}
+
+header {
+  position: sticky;
+  top: 0;
+  background-color: #1f2128;
+}
+
+#stats-header > div:nth-child(odd) {
+  border-right: 2px solid #383a44;
+  width: calc(100% - 3em);
+  left: 0;
+}
+
+#stats-header > div:nth-child(even) {
+  width: calc(100% - 6em);
+}
+
+#main-page {
+  display: flex;
+  flex-direction: column;
+  padding: 1em 2em;
+}
+
+#race-page {
+  display: grid;
+  grid-template: 1fr 1fr / 1fr;
+  gap: 1em;
+  padding: 1em 2em;
 }
 
 #race-details {
@@ -36,17 +160,10 @@ h1 {
   font-size: 0.7rem;
 }
 
-main {
-  display: grid;
-  grid-template: 1fr 1fr / 1fr;
-  grid-gap: 1em;
-  min-height: calc(100% - 2em);
-  padding: 1em 2em;
-}
-
 #map {
   height: 100%;
   width: 100%;
+  border-radius: 1em;
 }
 
 #list {
@@ -55,32 +172,33 @@ main {
   overflow-y: auto;
 
   .active {
-    background-color: #d8dfec;
+    background-color: #9d2821;
+    border-radius: 0.5em;
   }
 }
 
-@media screen and (min-width: 979px) {
-  main {
-    grid-template: 1fr / 1fr 1fr;
-  }
+// @media screen and (min-width: 979px) {
+//   main {
+//     grid-template: 1fr / 1fr 1fr;
+//   }
 
-  #list {
-    justify-content: space-evenly;
-  }
-}
+//   #list {
+//     justify-content: space-evenly;
+//   }
+// }
 
-@media screen and (min-width: 979px) and (max-height: 676px) {
-  main {
-    grid-template: 1fr / 1fr 1fr;
-  }
+// @media screen and (min-width: 979px) and (max-height: 676px) {
+//   main {
+//     grid-template: 1fr / 1fr 1fr;
+//   }
 
-  #list {
-    justify-content: flex-start;
-  }
-}
+//   #list {
+//     justify-content: flex-start;
+//   }
+// }
 
-@media screen and (orientation: landscape) {
-  main {
-    grid-template: 1fr / 1fr 1fr;
-  }
-}
+// @media screen and (orientation: landscape) {
+//   main {
+//     grid-template: 1fr / 1fr 1fr;
+//   }
+// }

@@ -1,42 +1,66 @@
-import getAllRaces, { getLap, getLapSummary } from './api-calls.ts';
-import showListData from './list.ts';
-import showMapData from './map.ts';
-import showRaceDetails from './race-details.ts';
-import './style.scss';
+import {
+  lapsSubject$,
+  mapLapsSubject$,
+  mapSubject$,
+  racesSubject$,
+  signalLapsRequest$,
+  signalMapLapsRequest$,
+  signalMapRequest$,
+  signalRacesRequest$
+} from './api-calls.ts';
+import showListData from './dom/list.ts';
+import mainPage from './dom/main-page.ts';
+import showMapData from './dom/map.ts';
+import racePage from './dom/race-page.ts';
+import type { IAllLaps, ILap } from './models/laps.d.ts';
+import type { IAllRaces } from './models/races.d.ts';
 
-let filename: string;
-
-const getFilename = (data: string[]) => {
-  filename = data[0];
-};
-
-function getRaceDetails() {
-  try {
-    getLapSummary(filename, showRaceDetails, errorCallBack);
-  } catch (error) {
-    console.error(error);
-  }
+export function getAllRaces() {
+  signalRacesRequest$.next(null);
+  racesSubject$.subscribe((res: IAllRaces) => {
+    try {
+      mainPage(res);
+    } catch (error) {
+      console.error(error);
+      return;
+    }
+  });
 }
 
-function getMapData() {
-  try {
-    getLap(filename, 1, showMapData, errorCallBack);
-  } catch (error) {
-    console.error(error);
-  }
+export default function getRaceLaps(filename: string) {
+  signalLapsRequest$.next(filename);
+  lapsSubject$.subscribe((res: IAllLaps) => {
+    try {
+      racePage(res);
+    } catch (error) {
+      console.error(error);
+      return;
+    }
+  });
 }
 
-function getListData() {
-  try {
-    getLapSummary(filename, showListData, errorCallBack);
-  } catch (error) {
-    console.error(error);
-  }
+export function getMapData(filename: string, lapNumber: number) {
+  signalMapRequest$.next({ filename, lapNumber });
+  mapSubject$.subscribe((res: ILap) => {
+    try {
+      showMapData(res);
+    } catch (error) {
+      console.error(error);
+      return;
+    }
+  });
 }
 
-const errorCallBack = (error: Error) => console.error(error);
+export function getListData(filename: string) {
+  signalMapLapsRequest$.next(filename);
+  mapLapsSubject$.subscribe((res: IAllLaps) => {
+    try {
+      showListData(res, res.filename);
+    } catch (error) {
+      console.error(error);
+      return;
+    }
+  });
+}
 
-getAllRaces(getFilename, errorCallBack);
-getRaceDetails();
-getMapData();
-getListData();
+getAllRaces();
